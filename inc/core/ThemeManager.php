@@ -1,16 +1,16 @@
 <?php
 /**
- * PicCool主题管理器
+ * PicShare主题管理器
  * 
  * 负责主题的核心功能管理和初始化
  */
 
-namespace PicCool\Core;
+namespace PicShare\Core;
 
-use PicCool\Config\Config;
-use PicCool\Container\Container;
-use PicCool\Cache\CacheManager;
-use PicCool\Database\DatabaseOptimizer;
+use PicShare\Config\Config;
+use PicShare\Container\Container;
+use PicShare\Cache\CacheManager;
+use PicShare\Database\DatabaseOptimizer;
 
 class ThemeManager {
     
@@ -63,12 +63,12 @@ class ThemeManager {
         
         // 设置图片尺寸
         \set_post_thumbnail_size(300, 200, true);
-        \add_image_size('piccool-large', 800, 600, true);
-        \add_image_size('piccool-medium', 400, 300, true);
-        \add_image_size('piccool-small', 150, 150, true);
+        \add_image_size('PicShare-large', 800, 600, true);
+        \add_image_size('PicShare-medium', 400, 300, true);
+        \add_image_size('PicShare-small', 150, 150, true);
         
         // 加载文本域
-        \load_theme_textdomain('piccool', \get_template_directory() . '/languages');
+        \load_theme_textdomain('PicShare', \get_template_directory() . '/languages');
     }
     
     /**
@@ -268,8 +268,8 @@ class ThemeManager {
      * 管理员脚本
      */
     public function admin_scripts() {
-        \wp_enqueue_style('piccool-admin', \get_template_directory_uri() . '/assets/css/admin.css', [], PICCOOL_VERSION);
-        \wp_enqueue_script('piccool-admin', \get_template_directory_uri() . '/assets/js/admin.js', ['jquery'], PICCOOL_VERSION, true);
+        \wp_enqueue_style('PicShare-admin', \get_template_directory_uri() . '/assets/css/admin.css', [], PicShare_VERSION);
+        \wp_enqueue_script('PicShare-admin', \get_template_directory_uri() . '/assets/js/admin.js', ['jquery'], PicShare_VERSION, true);
     }
     
     /**

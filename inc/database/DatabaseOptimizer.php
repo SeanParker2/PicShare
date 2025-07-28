@@ -1,11 +1,11 @@
 <?php
 /**
- * PicCool主题数据库优化类
+ * PicShare主题数据库优化类
  * 
  * 为自定义字段添加数据库索引，提升筛选查询性能
  */
 
-namespace PicCool\Database;
+namespace PicShare\Database;
 
 class DatabaseOptimizer {
     /**
@@ -40,14 +40,14 @@ class DatabaseOptimizer {
      */
     public static function addIndexes() {
         // 检查是否已经添加过索引
-        if (\get_option('piccool_indexes_added', false)) {
+        if (\get_option('PicShare_indexes_added', false)) {
             return;
         }
         
         self::createIndexes();
         
         // 标记索引已添加
-        \update_option('piccool_indexes_added', true);
+        \update_option('PicShare_indexes_added', true);
     }
     
     /**
@@ -59,16 +59,16 @@ class DatabaseOptimizer {
         // 为postmeta表添加复合索引
         $indexes = [
             // 为meta_key和meta_value添加复合索引
-            "ALTER TABLE {$wpdb->postmeta} ADD INDEX idx_piccool_meta_key_value (meta_key(20), meta_value(20))",
+            "ALTER TABLE {$wpdb->postmeta} ADD INDEX idx_PicShare_meta_key_value (meta_key(20), meta_value(20))",
             
             // 为post_id和meta_key添加复合索引（如果不存在）
-            "ALTER TABLE {$wpdb->postmeta} ADD INDEX idx_piccool_post_meta (post_id, meta_key(20))",
+            "ALTER TABLE {$wpdb->postmeta} ADD INDEX idx_PicShare_post_meta (post_id, meta_key(20))",
             
             // 为posts表的post_type和post_status添加复合索引
-            "ALTER TABLE {$wpdb->posts} ADD INDEX idx_piccool_type_status (post_type(20), post_status(20))",
+            "ALTER TABLE {$wpdb->posts} ADD INDEX idx_PicShare_type_status (post_type(20), post_status(20))",
             
             // 为posts表的post_date添加索引
-            "ALTER TABLE {$wpdb->posts} ADD INDEX idx_piccool_post_date (post_date)",
+            "ALTER TABLE {$wpdb->posts} ADD INDEX idx_PicShare_post_date (post_date)",
         ];
         
         foreach ($indexes as $sql) {
@@ -93,7 +93,7 @@ class DatabaseOptimizer {
     private static function createFieldIndex($field_name) {
         global $wpdb;
         
-        $index_name = "idx_piccool_{$field_name}";
+        $index_name = "idx_PicShare_{$field_name}";
         
         // 检查索引是否已存在
         if (self::indexExists($wpdb->postmeta, $index_name)) {
@@ -253,7 +253,7 @@ class DatabaseOptimizer {
         
         // 获取索引信息
         $indexes = $wpdb->get_results(
-            "SHOW INDEX FROM {$wpdb->postmeta} WHERE Key_name LIKE 'idx_piccool%'"
+            "SHOW INDEX FROM {$wpdb->postmeta} WHERE Key_name LIKE 'idx_PicShare%'"
         );
         
         $stats['indexes'] = array_map(function($index) {

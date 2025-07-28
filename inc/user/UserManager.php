@@ -1,14 +1,14 @@
 <?php
 /**
- * PicCool用户管理器
+ * PicShare用户管理器
  * 
  * 负责用户注册、登录、个人资料管理等功能
  */
 
-namespace PicCool\User;
+namespace PicShare\User;
 
-use PicCool\Config\Config;
-use PicCool\Cache\CacheManager;
+use PicShare\Config\Config;
+use PicShare\Cache\CacheManager;
 
 class UserManager {
     
@@ -52,7 +52,7 @@ class UserManager {
      */
     public function handle_register() {
         // 验证nonce
-        if (!\wp_verify_nonce($_POST['nonce'] ?? '', 'piccool_nonce')) {
+        if (!\wp_verify_nonce($_POST['nonce'] ?? '', 'PicShare_nonce')) {
             \wp_send_json_error('安全验证失败');
         }
         
@@ -92,7 +92,7 @@ class UserManager {
      */
     public function handle_login() {
         // 验证nonce
-        if (!\wp_verify_nonce($_POST['nonce'] ?? '', 'piccool_nonce')) {
+        if (!\wp_verify_nonce($_POST['nonce'] ?? '', 'PicShare_nonce')) {
             \wp_send_json_error('安全验证失败');
         }
         
@@ -135,7 +135,7 @@ class UserManager {
         }
         
         // 验证nonce
-        if (!\wp_verify_nonce($_POST['nonce'] ?? '', 'piccool_nonce')) {
+        if (!\wp_verify_nonce($_POST['nonce'] ?? '', 'PicShare_nonce')) {
             \wp_send_json_error('安全验证失败');
         }
         
@@ -169,7 +169,7 @@ class UserManager {
         }
         
         // 验证nonce
-        if (!\wp_verify_nonce($_POST['nonce'] ?? '', 'piccool_nonce')) {
+        if (!\wp_verify_nonce($_POST['nonce'] ?? '', 'PicShare_nonce')) {
             \wp_send_json_error('安全验证失败');
         }
         

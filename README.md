@@ -1,4 +1,4 @@
-# PicCool 主题 - 重构版本 2.0
+# PicShare 主题 - 重构版本 2.0
 
 一个功能完整、设计精美的WordPress素材资源分享平台主题，采用现代化架构重构。
 
@@ -28,7 +28,7 @@
 ## 📁 项目结构
 
 ```
-PicCool/
+PicShare/
 ├── assets/                 # 静态资源
 │   ├── css/               # 样式文件
 │   ├── js/                # JavaScript文件
@@ -142,11 +142,11 @@ PicCool/
 1. **上传主题文件**
    ```bash
    # 将主题文件上传到 WordPress 主题目录
-   wp-content/themes/piccool/
+   wp-content/themes/PicShare/
    ```
 
 2. **激活主题**
-   - 在 WordPress 后台 → 外观 → 主题 中激活 PicCool 主题
+   - 在 WordPress 后台 → 外观 → 主题 中激活 PicShare 主题
 
 3. **配置数据库**
    - 主题激活时会自动创建必要的数据库索引
@@ -195,9 +195,9 @@ Config::set('seo.meta_description', '默认描述');
 ### 创建自定义模块
 ```php
 <?php
-namespace PicCool\Custom;
+namespace PicShare\Custom;
 
-use PicCool\Container\Container;
+use PicShare\Container\Container;
 
 class CustomModule {
     public function __construct() {
@@ -276,10 +276,10 @@ A: 运行数据库优化工具，检查索引是否正确创建。
 
 如有问题或需要技术支持，请通过以下方式联系：
 
-- 📧 邮箱: support@piccool.com
-- 🌐 官网: https://piccool.com
-- 📚 文档: https://docs.piccool.com
+- 📧 邮箱: support@PicShare.com
+- 🌐 官网: https://PicShare.com
+- 📚 文档: https://docs.PicShare.com
 
 ---
 
-**PicCool 主题** - 让素材分享更简单、更高效！
+**PicShare 主题** - 让素材分享更简单、更高效！

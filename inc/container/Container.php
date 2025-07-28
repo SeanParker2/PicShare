@@ -1,11 +1,11 @@
 <?php
 /**
- * PicCool主题依赖注入容器
+ * PicShare主题依赖注入容器
  * 
  * 管理类的依赖关系，降低模块间耦合度
  */
 
-namespace PicCool\Container;
+namespace PicShare\Container;
 
 class Container {
     /**

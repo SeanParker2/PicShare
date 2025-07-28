@@ -1,11 +1,11 @@
 <?php
 /**
- * PicCool主题自动加载器
+ * PicShare主题自动加载器
  * 
  * 实现PSR-4自动加载标准
  */
 
-class PicCoolAutoloader {
+class PicShareAutoloader {
     /**
      * 命名空间前缀到目录的映射
      */
@@ -18,7 +18,7 @@ class PicCoolAutoloader {
         spl_autoload_register([__CLASS__, 'loadClass']);
         
         // 注册命名空间
-        self::addNamespace('PicCool\\', \get_template_directory() . '/inc/');
+        self::addNamespace('PicShare\\', \get_template_directory() . '/inc/');
     }
     
     /**
@@ -129,4 +129,4 @@ class PicCoolAutoloader {
 }
 
 // 注册自动加载器
-PicCoolAutoloader::register();
+PicShareAutoloader::register();

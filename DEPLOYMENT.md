@@ -1,4 +1,4 @@
-# PicCool主题部署指南
+# PicShare主题部署指南
 
 ## 系统要求
 
@@ -17,7 +17,7 @@
 
 ### 部署步骤
 
-1. 在PicCool主题目录下创建`docker-compose.yml`文件，内容如下：
+1. 在PicShare主题目录下创建`docker-compose.yml`文件，内容如下：
 
 ```yaml
 version: '3'
@@ -46,7 +46,7 @@ services:
       - "8000:80"
     restart: always
     volumes:
-      - ./:/var/www/html/wp-content/themes/piccool
+      - ./:/var/www/html/wp-content/themes/PicShare
     environment:
       WORDPRESS_DB_HOST: db:3306
       WORDPRESS_DB_USER: wordpress
@@ -86,10 +86,10 @@ docker-compose up -d
    - WordPress: http://localhost:8000
    - phpMyAdmin: http://localhost:8080 (用户名: root, 密码: wordpress)
 
-4. 完成WordPress初始设置后，进入管理后台激活PicCool主题：
+4. 完成WordPress初始设置后，进入管理后台激活PicShare主题：
    - 登录WordPress管理后台
    - 进入「外观」>「主题」
-   - 找到并激活「PicCool主题」
+   - 找到并激活「PicShare主题」
 
 ## 方法二：传统部署
 
@@ -100,13 +100,13 @@ docker-compose up -d
 
 ### 部署步骤
 
-1. 将PicCool主题文件夹复制到WordPress的`wp-content/themes/`目录下
+1. 将PicShare主题文件夹复制到WordPress的`wp-content/themes/`目录下
 
 2. 登录WordPress管理后台
 
 3. 进入「外观」>「主题」
 
-4. 找到并激活「PicCool主题」
+4. 找到并激活「PicShare主题」
 
 ## 主题配置
 
@@ -114,7 +114,7 @@ docker-compose up -d
 
 1. 进入「外观」>「自定义」设置主题外观
 
-2. 进入「PicCool设置」配置主题特定功能
+2. 进入「PicShare设置」配置主题特定功能
 
 3. 创建菜单并分配到主题位置
 

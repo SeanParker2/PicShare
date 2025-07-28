@@ -1,11 +1,11 @@
 <?php
 /**
- * PicCool主题配置管理类
+ * PicShare主题配置管理类
  * 
  * 集中管理主题的所有配置项
  */
 
-namespace PicCool\Config;
+namespace PicShare\Config;
 
 class Config {
     /**
@@ -19,7 +19,7 @@ class Config {
     private static $defaults = [
         // 站点基本信息
         'site' => [
-            'name' => 'PicCool',
+            'name' => 'PicShare',
             'description' => '专业的素材资源分享平台',
             'keywords' => '素材,图片,设计,资源',
             'logo' => '',
@@ -80,7 +80,7 @@ class Config {
             'enable' => true,
             'driver' => 'wordpress', // wordpress, redis, memcached
             'expire' => 3600,
-            'prefix' => 'piccool_',
+            'prefix' => 'PicShare_',
         ],
         
         // API配置
@@ -126,7 +126,7 @@ class Config {
         self::loadFromDatabase();
         
         // 应用过滤器，允许其他代码修改配置
-        self::$config = \apply_filters('piccool_config', self::$config);
+        self::$config = \apply_filters('PicShare_config', self::$config);
     }
     
     /**
@@ -134,7 +134,7 @@ class Config {
      */
     private static function loadFromDatabase() {
         // 从WordPress选项表加载配置
-        $db_config = \get_option('piccool_config', []);
+        $db_config = \get_option('PicShare_config', []);
         
         if (is_array($db_config)) {
             // 递归合并配置，保留默认值
@@ -176,7 +176,7 @@ class Config {
             $config = $config[$key];
         }
         
-        return \apply_filters('piccool_config_get', $config, $key);
+        return \apply_filters('PicShare_config_get', $config, $key);
     }
     
     /**
@@ -216,7 +216,7 @@ class Config {
      * @return bool 是否保存成功
      */
     public static function save() {
-        return \update_option('piccool_config', self::$config);
+        return \update_option('PicShare_config', self::$config);
     }
     
     /**

@@ -1,14 +1,14 @@
 <?php
 /**
- * PicCool素材管理器
+ * PicShare素材管理器
  * 
  * 负责素材的上传、分类、筛选、下载等功能
  */
 
-namespace PicCool\Material;
+namespace PicShare\Material;
 
-use PicCool\Config\Config;
-use PicCool\Cache\CacheManager;
+use PicShare\Config\Config;
+use PicShare\Cache\CacheManager;
 
 class MaterialManager {
     
@@ -61,7 +61,7 @@ class MaterialManager {
         }
         
         // 验证nonce
-        if (!\wp_verify_nonce($_POST['nonce'] ?? '', 'piccool_nonce')) {
+        if (!\wp_verify_nonce($_POST['nonce'] ?? '', 'PicShare_nonce')) {
             \wp_send_json_error('安全验证失败');
         }
         

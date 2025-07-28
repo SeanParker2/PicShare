@@ -1,6 +1,6 @@
 <?php
 /**
- * PicCool主题 - 重构版本
+ * PicShare主题 - 重构版本
  * 
  * 采用模块化架构，使用命名空间和依赖注入
  */
@@ -11,35 +11,35 @@ if (!defined('ABSPATH')) {
 }
 
 // 定义主题版本
-define('PICCOOL_VERSION', '2.0.0');
-define('PICCOOL_PATH', \get_template_directory());
-define('PICCOOL_URL', \get_template_directory_uri());
+define('PicShare_VERSION', '2.0.0');
+define('PicShare_PATH', \get_template_directory());
+define('PicShare_URL', \get_template_directory_uri());
 
 // 加载自动加载器
-require_once PICCOOL_PATH . '/inc/autoloader.php';
+require_once PicShare_PATH . '/inc/autoloader.php';
 
 // 加载配置管理
-require_once PICCOOL_PATH . '/inc/config/Config.php';
+require_once PicShare_PATH . '/inc/config/Config.php';
 
 // 加载依赖注入容器
-require_once PICCOOL_PATH . '/inc/container/Container.php';
+require_once PicShare_PATH . '/inc/container/Container.php';
 
 // 加载缓存管理
-require_once PICCOOL_PATH . '/inc/cache/CacheManager.php';
+require_once PicShare_PATH . '/inc/cache/CacheManager.php';
 
 // 加载数据库优化
-require_once PICCOOL_PATH . '/inc/database/DatabaseOptimizer.php';
+require_once PicShare_PATH . '/inc/database/DatabaseOptimizer.php';
 
 // 使用命名空间
-use PicCool\Config\Config;
-use PicCool\Container\Container;
-use PicCool\Cache\CacheManager;
-use PicCool\Database\DatabaseOptimizer;
+use PicShare\Config\Config;
+use PicShare\Container\Container;
+use PicShare\Cache\CacheManager;
+use PicShare\Database\DatabaseOptimizer;
 
 /**
  * 主题初始化
  */
-function piccool_init() {
+function PicShare_init() {
     // 注册服务到容器
     Container::singleton('config', function() {
         return new Config();
@@ -53,69 +53,69 @@ function piccool_init() {
         return new DatabaseOptimizer();
     });
 }
-add_action('after_setup_theme', 'piccool_init');
+add_action('after_setup_theme', 'PicShare_init');
 
 /**
  * 加载CSS和JS资源
  */
-function piccool_enqueue_scripts() {
-    $version = Config::get('cache.enable', false) ? PICCOOL_VERSION : time();
+function PicShare_enqueue_scripts() {
+    $version = Config::get('cache.enable', false) ? PicShare_VERSION : time();
     
     // CSS文件
-    \wp_enqueue_style('bootstrap', PICCOOL_URL . '/assets/css/bootstrap.min.css', [], $version);
-    \wp_enqueue_style('owl-carousel', PICCOOL_URL . '/assets/css/owl.carousel.min.css', [], $version);
-    \wp_enqueue_style('animate', PICCOOL_URL . '/assets/css/animate.min.css', [], $version);
-    \wp_enqueue_style('bootstrap-icons', PICCOOL_URL . '/assets/bifont/bootstrap-icons.css', [], $version);
-    \wp_enqueue_style('piccool-style', PICCOOL_URL . '/style.css', [], $version);
+    \wp_enqueue_style('bootstrap', PicShare_URL . '/assets/css/bootstrap.min.css', [], $version);
+    \wp_enqueue_style('owl-carousel', PicShare_URL . '/assets/css/owl.carousel.min.css', [], $version);
+    \wp_enqueue_style('animate', PicShare_URL . '/assets/css/animate.min.css', [], $version);
+    \wp_enqueue_style('bootstrap-icons', PicShare_URL . '/assets/bifont/bootstrap-icons.css', [], $version);
+    \wp_enqueue_style('PicShare-style', PicShare_URL . '/style.css', [], $version);
     
     // 移除默认jQuery
     \wp_deregister_script('jquery');
     
     // JS文件
-    \wp_enqueue_script('jquery', PICCOOL_URL . '/assets/js/jquery.min.js', [], $version, false);
-    \wp_enqueue_script('bootstrap', PICCOOL_URL . '/assets/js/bootstrap.min.js', ['jquery'], $version, true);
-    \wp_enqueue_script('owl-carousel', PICCOOL_URL . '/assets/js/owl.carousel.min.js', ['jquery'], $version, true);
-    \wp_enqueue_script('piccool-main', PICCOOL_URL . '/assets/js/js.js', ['jquery'], $version, true);
+    \wp_enqueue_script('jquery', PicShare_URL . '/assets/js/jquery.min.js', [], $version, false);
+    \wp_enqueue_script('bootstrap', PicShare_URL . '/assets/js/bootstrap.min.js', ['jquery'], $version, true);
+    \wp_enqueue_script('owl-carousel', PicShare_URL . '/assets/js/owl.carousel.min.js', ['jquery'], $version, true);
+    \wp_enqueue_script('PicShare-main', PicShare_URL . '/assets/js/js.js', ['jquery'], $version, true);
     
     // 本地化脚本
-    \wp_localize_script('piccool-main', 'piccool_ajax', [
+    \wp_localize_script('PicShare-main', 'PicShare_ajax', [
         'ajax_url' => \admin_url('admin-ajax.php'),
-        'nonce' => \wp_create_nonce('piccool_nonce'),
+        'nonce' => \wp_create_nonce('PicShare_nonce'),
     ]);
 }
-\add_action('wp_enqueue_scripts', 'piccool_enqueue_scripts');
+\add_action('wp_enqueue_scripts', 'PicShare_enqueue_scripts');
 
 // 加载传统模块（保持向后兼容）
-require_once PICCOOL_PATH . '/inc/norm.php';
-require_once PICCOOL_PATH . '/inc/comment/main.php';	//评论核心
-require_once PICCOOL_PATH . '/inc/type/show.php';//自定义分类法show
-require_once PICCOOL_PATH . '/inc/type/forum.php';//自定义分类法forum
-require_once PICCOOL_PATH . '/inc/query_show.php'; //素材筛选核心
-require_once PICCOOL_PATH . '/inc/query_field.php'; //素材筛选字段
-require_once PICCOOL_PATH . '/pages/user/inc/setup-functions.php'; //用户中心 - 资料
+require_once PicShare_PATH . '/inc/norm.php';
+require_once PicShare_PATH . '/inc/comment/main.php';	//评论核心
+require_once PicShare_PATH . '/inc/type/show.php';//自定义分类法show
+require_once PicShare_PATH . '/inc/type/forum.php';//自定义分类法forum
+require_once PicShare_PATH . '/inc/query_show.php'; //素材筛选核心
+require_once PicShare_PATH . '/inc/query_field.php'; //素材筛选字段
+require_once PicShare_PATH . '/pages/user/inc/setup-functions.php'; //用户中心 - 资料
 
 
 /**
  * 注册导航菜单
  */
-function piccool_register_menus() {
+function PicShare_register_menus() {
     \register_nav_menus([
-        'main' => \__('主菜单导航', 'piccool'),
-        'mob' => \__('手机导航', 'piccool'),
-        'foot1' => \__('底部菜单1', 'piccool'),
-        'foot2' => \__('底部菜单2', 'piccool'),
-        'foot3' => \__('底部菜单3', 'piccool'),
-        'foot4' => \__('底部菜单4', 'piccool'),
-        'hot_s' => \__('热门搜索', 'piccool'),
+        'main' => \__('主菜单导航', 'PicShare'),
+        'mob' => \__('手机导航', 'PicShare'),
+        'foot1' => \__('底部菜单1', 'PicShare'),
+        'foot2' => \__('底部菜单2', 'PicShare'),
+        'foot3' => \__('底部菜单3', 'PicShare'),
+        'foot4' => \__('底部菜单4', 'PicShare'),
+        'hot_s' => \__('热门搜索', 'PicShare'),
     ]);
 }
-\add_action('after_setup_theme', 'piccool_register_menus');
+\add_action('after_setup_theme', 'PicShare_register_menus');
 
 
 /**
  * 文章访问计数功能
  */
-class PicCool_Post_Views {
+class PicShare_Post_Views {
     
     public static function init() {
         \add_action('wp_head', [__CLASS__, 'record_visitors']);
@@ -148,11 +148,11 @@ class PicCool_Post_Views {
 }
 
 // 初始化文章访问计数
-PicCool_Post_Views::init();
+PicShare_Post_Views::init();
 
 // 保持向后兼容的函数
 function post_views($before = '(点击 ', $after = ' 次)', $echo = 1) {
-    return PicCool_Post_Views::get_post_views($before, $after, $echo);
+    return PicShare_Post_Views::get_post_views($before, $after, $echo);
 }
 
 
@@ -160,7 +160,7 @@ function post_views($before = '(点击 ', $after = ' 次)', $echo = 1) {
  * 面包屑导航功能
  * 基于 Bootstrap 4 样式
  */
-class PicCool_Breadcrumbs {
+class PicShare_Breadcrumbs {
     
     public static function get_breadcrumbs() {
         global $wp_query;
@@ -238,7 +238,7 @@ class PicCool_Breadcrumbs {
 
 // 保持向后兼容的函数
 function get_breadcrumbs() {
-    PicCool_Breadcrumbs::get_breadcrumbs();
+    PicShare_Breadcrumbs::get_breadcrumbs();
 }
 
 
@@ -248,7 +248,7 @@ function get_breadcrumbs() {
 /**
  * Gravatar头像加速 - 使用中国服务器
  */
-class PicCool_Avatar {
+class PicShare_Avatar {
     
     public static function init() {
         \add_filter('get_avatar', [__CLASS__, 'get_ssl_avatar']);
@@ -269,13 +269,13 @@ class PicCool_Avatar {
 }
 
 // 初始化头像加速
-PicCool_Avatar::init();
+PicShare_Avatar::init();
 
 
 /**
  * 文章点赞功能
  */
-class PicCool_Post_Like {
+class PicShare_Post_Like {
     
     public static function init() {
         \add_action('wp_ajax_nopriv_specs_zan', [__CLASS__, 'handle_like']);
@@ -284,7 +284,7 @@ class PicCool_Post_Like {
     
     public static function handle_like() {
         // 验证nonce
-        if (!\wp_verify_nonce($_POST['nonce'] ?? '', 'piccool_nonce')) {
+        if (!\wp_verify_nonce($_POST['nonce'] ?? '', 'PicShare_nonce')) {
             \wp_die('Security check failed');
         }
         
@@ -320,12 +320,12 @@ class PicCool_Post_Like {
 }
 
 // 初始化点赞功能
-PicCool_Post_Like::init();
+PicShare_Post_Like::init();
 
 /**
  * 媒体上传支持
  */
-class PicCool_Media_Support {
+class PicShare_Media_Support {
     
     public static function init() {
         \add_filter('upload_mimes', [__CLASS__, 'add_mime_types']);
@@ -351,4 +351,4 @@ class PicCool_Media_Support {
 }
 
 // 初始化媒体支持
-PicCool_Media_Support::init();
+PicShare_Media_Support::init();
